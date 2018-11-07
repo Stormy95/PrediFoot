@@ -14,9 +14,13 @@ from datetime import *
 from datetime import datetime
 
 tab = pd.read_excel('SaisonPL2017.xlsx')
-tab2018 = pd.read_excel('SaisonPL2018.xlsx')
+tab2018 = pd.read_excel('SaisonPL2018_2019_encours.xlsx')
 tab2017and2018 = pd.read_excel('SaisonsPL2017and2018.xlsx')
 calendrier_PL2018 = pd.read_excel('Classeur3.xlsx')
+
+
+
+changement_nom_equipes(tab,equipescal,equipesres)
 
 # Calcul nombre de but total de l'equipe home marqués à domicile durant la saison 
 def calcul_nb_but_dom(tab , equipe):
@@ -122,16 +126,19 @@ def proba_gagnant(tab,equipe_dom,equipe_ext):
     p1 = int( 1000 * prob_dom_gagne ) /10
     pe = int( 1000 * prob_egalite ) /10
     p2 = int( 1000 * prob_ext_gagne ) /10
-    
+#    p1 =  prob_dom_gagne 
+#    pe =  prob_egalite
+#    p2 =  prob_ext_gagne 
+#       
     if prob_egalite > prob_dom_gagne and prob_egalite > prob_ext_gagne:
         # Cas d'egalite 
-        return 'Egalité', p1, pe, p2
+        return equipe_dom,'vs',equipe_ext,'Egalité', p1, pe, p2
     if prob_ext_gagne > prob_dom_gagne : 
         # Equipe à l'extérieur gagne
-        return equipe_ext, 'gagne', p1, pe, p2
+        return equipe_dom,'vs',equipe_ext, equipe_ext, 'gagne', p1, pe, p2
     if prob_ext_gagne < prob_dom_gagne:
         # Equipe à domicile gagne
-        return equipe_dom, 'gagne', p1, pe, p2
+        return equipe_dom,'vs',equipe_ext,equipe_dom, 'gagne', p1, pe, p2
     
 
 teams = get_teams_list(tab)
@@ -180,8 +187,14 @@ def Test_prediction(tab):
 
 print(proba_gagnant(tab2018,'Chelsea','Man United'))
 
+"""
 
-def prediction_matchs_we(tab,calendrier,date):
+Prévision des matchs du week_end
+
+"""
+
+
+def matchs_we(tab,calendrier,date):
     
     total_match_count = calendrier['HOME TEAM'].shape[0]
     
@@ -195,15 +208,25 @@ def prediction_matchs_we(tab,calendrier,date):
 week_end = ['2018-10-20 00:00:00','2018-10-21 00:00:00','2018-10-22 00:00:00']
 
 
-d = datetime(2018, 10, 20, 0, 0)
+d1 = datetime(2018, 11, 10, 0, 0)
+d2 = datetime(2018, 11, 11, 0, 0)
+d3 = datetime(2018, 11, 22, 0, 0)
 
-l = prediction_matchs_we(tab2018,calendrier_PL2018,d)
+d = [d1,d2]
 
-matchs_we = []
-for k in l:
-    matchs_we.append(proba_gagnant(tab2018,k[0],k[1]))
+l=[]
+for j in range(len(d)):
+    l += matchs_we(tab2018,calendrier_PL2018,d[j])
+#print(l)
 
-print(matchs_we)
+matchs_we1 = []
+for j in range(len(l)):
+    if l[j][0]== 'Wolverhampton Wanderers' or l[j][1]== 'Wolverhampton Wanderers' or l[j][0]=='Fulham' or l[j][1]== 'Fulham':                       
+        pass
+    else:  
+        matchs_we1.append(proba_gagnant(tab2018,l[j][0],l[j][1]))
+
+print(matchs_we1)
 
 #print(calendrier_PL2018['DATE'])
 
@@ -217,7 +240,43 @@ print(matchs_we)
 #        print(date)
 #    print(calendrier_PL2018['DATE'][i])
         
+
+
+
+
+""" 
+
+Correspondance des tableaux Excel pour l'ecriture des équipes  
+  
+"""
+## code V1.2
+
+equipesres = ['Man City','Tottenham','Man United','Leicester','Wolves','Brighton','West Ham','Newcastle','Huddersfield','Cardiff']
+equipescal = ['Manchester City','Tottenham Hotspur','Manchester United','Leicester City','Wolverhampton Wanderers','Brighton and Hove Albion','West Ham United','Newcastle United','Huddersfield Town','Cardiff City']                     
+
+def changement_nom_equipes(tab,equipescal,equiperes):
+    
+    
+    for i in range(380):
+        for j in range(len(equipesres)):
+            if calendrier_PL2018['HOME TEAM'][i]==equipescal[j]:
+                calendrier_PL2018['HOME TEAM'][i]=equipesres[j]
+            
+            if calendrier_PL2018['AWAY TEAM'][i]==equipescal[j]:
+                calendrier_PL2018['AWAY TEAM'][i]=equipesres[j]
+                
+    return 'Equipes Changées'
+
         
+            
         
-        
+
+
+
+
+
+
+
+
+
 
