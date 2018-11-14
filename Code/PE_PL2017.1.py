@@ -19,46 +19,55 @@ tab2017and2018 = pd.read_excel('SaisonsPL2017and2018.xlsx')
 calendrier_PL2018 = pd.read_excel('Classeur3.xlsx')
 
 
+### changemenet des noms des équipes du calendrier calendrier_PL2018 pour qu'elles correspondent avec celles de tab2018 les résultats de la saison en cours.
+changement_nom_equipes(tab,equipescal,equipesres) 
 
-changement_nom_equipes(tab,equipescal,equipesres)
 
-# Calcul nombre de but total de l'equipe home marqués à domicile durant la saison 
+""" Calcul nombre de but total de l'equipe home marqués à domicile durant la saison """
 def calcul_nb_but_dom(tab , equipe):
     home_goals = tab.loc[tab['HomeTeam']== equipe]['FTHG'].sum()
     return home_goals
 
-# Calcul nombre de but total de l'equipe away marqués à l'extérieur durant la saison 
+""" Calcul nombre de but total de l'equipe 'équipe' marqués à l'extérieur durant la saison """
 def calcul_nb_but_ext(tab,equipe):
     away_goals = tab.loc[tab['AwayTeam']==equipe]['FTAG'].sum()
     return away_goals
 
+""" Le potentiel d'attaque de l'équipe 'equipe' à domicile """
 def potentiel_attaque_dom(tab,equipe):
     home_match_count = tab.loc[tab['HomeTeam']==equipe].shape[0]
     return calcul_nb_but_dom(tab,equipe)/home_match_count
 
+""" Le potentiel d'attaque de l'équipe 'equipe' à l'extérieur """
 def potentiel_attaque_ext(tab,equipe):
     away_match_count = tab.loc[tab['AwayTeam']==equipe].shape[0]
     return calcul_nb_but_ext(tab,equipe)/away_match_count
 
+""" calcul du nombre de but pris à domicile par l'équipe 'equipe' """
 def calcul_nb_but_pris_dom(tab,equipe):
     home_goals_taken = tab.loc[tab['HomeTeam']== equipe]['FTAG'].sum()
     return home_goals_taken
 
+""" calcul du nombre de but pris à l'extérieur par l'équipe 'equipe' """
 def calcul_nb_but_pris_ext(tab,equipe):
     away_goals_taken = tab.loc[tab['AwayTeam']== equipe]['FTHG'].sum()
     return away_goals_taken
-    
+
+""" Le potentiel de défense de l'équipe 'equipe' à domicile """
 def potentiel_defense_dom(tab,equipe):
     home_match_count = tab.loc[tab['HomeTeam']==equipe].shape[0]
     return calcul_nb_but_pris_dom(tab,equipe)/home_match_count
 
+""" Le potentiel de défense de l'équipe 'equipe' à l'extérieur """
 def potentiel_defense_ext(tab,equipe):
     away_match_count = tab.loc[tab['AwayTeam']==equipe].shape[0]
     return calcul_nb_but_pris_ext(tab,equipe)/away_match_count
 
+""" créer la liste des équipes  """
 def get_teams_list(tab):
     return tab['HomeTeam'].drop_duplicates()
 
+""" écrit dans un nouvel excel """
 def write_data_excel(tab):
     writer = pd.ExcelWriter('output.xlsx')
     new_tab = get_teams_list(tab)
@@ -66,14 +75,14 @@ def write_data_excel(tab):
 
 #write_data_excel(tab)
 
-# Calcul nombre de but total marqués à domicile durant la saison 
+""" Calcul nombre de but total marqués à domicile durant la saison """
 def nombre_moyen_but_ligue_dom(tab):
     total_home_goals = tab['FTHG'].sum() 
     total_match_count = tab['FTHG'].shape[0]
     
     return total_home_goals / total_match_count
 
-# Calcul nombre de but total marqués à l'extérieur durant la saison
+""" Calcul nombre de but total marqués à l'extérieur durant la saison """
 def nombre_moyen_but_ligue_ext(tab):
     total_away_goals = tab['FTAG'].sum() 
     total_match_count = tab['FTAG'].shape[0]
@@ -81,6 +90,12 @@ def nombre_moyen_but_ligue_ext(tab):
     return total_away_goals / total_match_count
 
 
+""" 
+
+calcul des forces d'attaque et de défense pour l'équipe 'equipe' 
+à domicile ou exterieur 
+
+"""
 
 def force_attaque_dom(tab,equipe):
     return  potentiel_attaque_dom(tab,equipe) / nombre_moyen_but_ligue_dom(tab)
@@ -97,7 +112,7 @@ def force_defense_ext(tab,equipe):
 
 
 
-#  --------- Parametre lambda de la loi de poisson ----------
+""" --------- Parametre lambda de la loi de poisson ----------  """
 
 def lambda_dom(tab,equipe_dom,equipe_ext):
     return force_attaque_dom(tab,equipe_dom) * force_defense_ext(tab,equipe_ext) * nombre_moyen_but_ligue_dom(tab)
@@ -105,6 +120,11 @@ def lambda_dom(tab,equipe_dom,equipe_ext):
 def lambda_ext(tab,equipe_dom,equipe_ext):
     return force_attaque_ext(tab,equipe_ext) * force_defense_dom(tab,equipe_dom) * nombre_moyen_but_ligue_ext(tab)
 
+
+""" 
+Pour un match donné entre equipe_dom et equipe_ext, retourne le résultat du match; 
+et les probabilité de chaque possibilité (1,N,2)
+"""
 def proba_gagnant(tab,equipe_dom,equipe_ext):
     L1=[]
     L2=[]
@@ -144,7 +164,11 @@ def proba_gagnant(tab,equipe_dom,equipe_ext):
 teams = get_teams_list(tab)
 
 
-
+"""
+Evaluation du programme sur des matchs déjà déroulés
+Test la fonction proba_gagnant() pour chaque match de tab, et compare avec le résultat réel du match avec la prédiction
+Retourne en % l'évaluation du programme 
+"""
 def Test_prediction(tab):
     
     total_match_count = tab['FTHG'].shape[0]
@@ -232,14 +256,7 @@ print(matchs_we1)
 
 
 #total_match_count = calendrier_PL2018['HOME TEAM'].shape[0]
-#
-#date = '2018-10-20 00:00:00'
-#    
-#for i in range(total_match_count):
-#    if calendrier_PL2018['DATE'][i] == date:
-#        print(date)
-#    print(calendrier_PL2018['DATE'][i])
-        
+     
 
 
 
