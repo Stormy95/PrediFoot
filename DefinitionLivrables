@@ -1,0 +1,62 @@
+**PE Foot/classements**
+
+Louis Duverneuil, Miquel Thibaud, Hambli Khaled, KADIRI Yoness, Gaetan Gelineau, Caio Da Costa
+
+Compte github [https://github.com/amigocap](https://github.com/amigocap)
+
+[https://github.com/AmigoCap/PrediFoot](https://github.com/AmigoCap/PrediFoot) : me donner vos comptes github
+
+Format de notebooks [https://github.com/AmigoCap/GPSFlow/tree/master/notebooks](https://github.com/AmigoCap/GPSFlow/tree/master/notebooks)
+
+
+
+Livrable 1
+
+- Identifier les sources de données
+  - [http://www.football-data.co.uk/francem.php](http://www.football-data.co.uk/francem.php)
+  - maxifoot
+  - Scrapping
+  - API
+
+QUI ? STATUS: A FAIRE, EN COURS, A VALIDER, FINI
+
+- Définir un format de données
+- Extraire / formater les données
+- Automatiser
+- Sources de données (par ex Fifa notes des joueurs)
+- Interview de personnes qui font des prédictions
+- Données de paris sportifs
+- Stocker les données (GitHub)
+
+Livrable 2
+
+- Statistiques simples sur les données
+- But moyen/équipe, ..
+- Visualiser les rankings
+-
+
+Livrable 3
+
+- Appliquer loi simple de prédiction
+- Par exemple Poisson
+- Prédire le match du weekend
+
+Livrable 4
+
+- Identifier les méthodes existantes de prédiction
+- Etat de l&#39;art assez global
+- Voir modeles voir e-games
+- [https://fivethirtyeight.com/interactives/march-madness-predictions-2015/#mens](https://fivethirtyeight.com/interactives/march-madness-predictions-2015/#mens)
+-
+
+Livrable 5
+
+- Améliorer le modèle
+- Ajouter de données / métadonnées,
+- ...
+
+Livrable 6
+
+- CAN / Tournoi
+
+- ...
