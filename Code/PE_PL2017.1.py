@@ -14,9 +14,33 @@ from datetime import *
 from datetime import datetime
 
 tab = pd.read_excel('SaisonPL2017.xlsx')
-tab2018 = pd.read_excel('SaisonPL2018_2019_encours.xlsx')
-tab2017and2018 = pd.read_excel('SaisonsPL2017and2018.xlsx')
+tab2018 = pd.read_excel('SaisonPL2018_2019_encours 2.xlsx')
 calendrier_PL2018 = pd.read_excel('Classeur3.xlsx')
+
+
+
+""" 
+
+Correspondance des tableaux Excel pour l'ecriture des équipes  
+  
+"""
+## code V1.2
+
+equipesres = ['Man City','Tottenham','Man United','Leicester','Wolves','Brighton','West Ham','Newcastle','Huddersfield','Cardiff']
+equipescal = ['Manchester City','Tottenham Hotspur','Manchester United','Leicester City','Wolverhampton Wanderers','Brighton and Hove Albion','West Ham United','Newcastle United','Huddersfield Town','Cardiff City']                     
+
+def changement_nom_equipes(tab,equipescal,equiperes):
+    
+    
+    for i in range(380):
+        for j in range(len(equipesres)):
+            if calendrier_PL2018['HOME TEAM'][i]==equipescal[j]:
+                calendrier_PL2018['HOME TEAM'][i]=equipesres[j]
+            
+            if calendrier_PL2018['AWAY TEAM'][i]==equipescal[j]:
+                calendrier_PL2018['AWAY TEAM'][i]=equipesres[j]
+                
+    return 'Equipes Changées'
 
 
 ### changemenet des noms des équipes du calendrier calendrier_PL2018 pour qu'elles correspondent avec celles de tab2018 les résultats de la saison en cours.
@@ -260,29 +284,6 @@ print(matchs_we1)
 
 
 
-
-""" 
-
-Correspondance des tableaux Excel pour l'ecriture des équipes  
-  
-"""
-## code V1.2
-
-equipesres = ['Man City','Tottenham','Man United','Leicester','Wolves','Brighton','West Ham','Newcastle','Huddersfield','Cardiff']
-equipescal = ['Manchester City','Tottenham Hotspur','Manchester United','Leicester City','Wolverhampton Wanderers','Brighton and Hove Albion','West Ham United','Newcastle United','Huddersfield Town','Cardiff City']                     
-
-def changement_nom_equipes(tab,equipescal,equiperes):
-    
-    
-    for i in range(380):
-        for j in range(len(equipesres)):
-            if calendrier_PL2018['HOME TEAM'][i]==equipescal[j]:
-                calendrier_PL2018['HOME TEAM'][i]=equipesres[j]
-            
-            if calendrier_PL2018['AWAY TEAM'][i]==equipescal[j]:
-                calendrier_PL2018['AWAY TEAM'][i]=equipesres[j]
-                
-    return 'Equipes Changées'
 
         
             
