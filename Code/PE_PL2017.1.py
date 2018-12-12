@@ -286,7 +286,36 @@ print(matchs_we1)
 
 
         
-            
+def Test_prediction_2(loi_prevision,tab_part1,tab_part2):
+    
+    
+    l=[]
+    X1=[]
+    X2=[]
+    Y=[ k for k in range(17,33)]
+    for i in range(1,161,10):
+        S1=0
+        S2=0
+        for j in range(10):
+            # On enregistre le résultat de chaque match 
+            if tab_part2['FTHG'][i+j]>tab_part2['FTAG'][i+j]:
+                res = tab_part2['HomeTeam'][i+j]
+            if tab_part2['FTHG'][i+j]<tab_part2['FTAG'][i+j]:
+                res = tab_part2['AwayTeam'][i+j]
+            else:
+                res = 'Egalité'
+            # On prévoit le résultat du match 
+            p = proba_gagnant(tab_part1,tab_part2['HomeTeam'][i+j],tab_part2['AwayTeam'][i+j])
+        
+            if p == res : 
+                S1+=1
+            if loi_hasard(tab_part1,tab_part2['HomeTeam'][i+j],tab_part2['AwayTeam'][i+j]) == res[0]:
+                S2+=1
+        
+        
+        X1.append(S1)
+        X2.append(S2)
+        
         
 
 
