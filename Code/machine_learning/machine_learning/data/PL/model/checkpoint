@@ -1,0 +1,2 @@
+model_checkpoint_path: "TF_chris"
+all_model_checkpoint_paths: "TF_chris"

@@ -1,0 +1,22 @@
+[
+{"name": "manchester-city", "att": 84, "mid": 83, "def": 82},
+{"name": "chelsea", "att": 83, "mid": 83, "def": 81},
+{"name": "arsenal", "att": 81, "mid": 80, "def": 79},
+{"name": "manchester-utd", "att": 77, "mid": 82, "def": 75},
+{"name": "liverpool", "att": 79, "mid": 79, "def": 79},
+{"name": "everton", "att": 80, "mid": 77, "def": 74},
+{"name": "spurs", "att": 78, "mid": 76, "def": 78},
+{"name": "swansea-city", "att": 78, "mid": 76, "def": 76},
+{"name": "southampton", "att": 77, "mid": 77, "def": 75},
+{"name": "sunderland", "att": 78, "mid": 74, "def": 74},
+{"name": "newcastle-utd", "att": 77, "mid": 75, "def": 76},
+{"name": "west-ham", "att": 76, "mid": 77, "def": 75},
+{"name": "stoke-city", "att": 75, "mid": 77, "def": 76},
+{"name": "west-brom", "att": 77, "mid": 73, "def": 71},
+{"name": "crystal-palace", "att": 74, "mid": 76, "def": 75},
+{"name": "aston-villa", "att": 74, "mid": 74, "def": 76},
+{"name": "norwich", "att": 76, "mid": 74, "def": 71},
+{"name": "watford", "att": 75, "mid": 73, "def": 72},
+{"name": "leicester-city", "att": 74, "mid": 74, "def": 73},
+{"name": "bournemouth", "att": 75, "mid": 71, "def": 72}
+]
