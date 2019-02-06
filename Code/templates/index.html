@@ -1,0 +1,40 @@
+<html>
+<head>
+  <title>Prédiction des résultats sportifs</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="utf-8">
+</head>
+<body>  
+
+<h1>Prédictions des matchs de Première League</h1>
+<h4>Prédictions basées sur les résultats de la saison 2017-2018</h4>
+
+<form action="" method="POST">
+    <select name="team1" class="custom-select">
+      <option selected>Choisissez l'équipe jouant à domicile</option>
+        {% for team in team_list %}
+            <option>{{ team }}</option>
+        {% endfor %}
+    </select>
+
+
+    <select name="team2" class="custom-select">
+      <option selected>Choisissez l'équipe jouant à l'extérieur</option>
+        {% for team in team_list %}
+            <option>{{ team }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="btn btn-primary">Prédire</button>
+</form>
+
+<p>
+{% if prediction != "" %}
+{{ prediction }}
+{% endif %}
+</p>
+
+</body>
+</html>
+
