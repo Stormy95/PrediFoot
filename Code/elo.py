@@ -6,7 +6,7 @@ from math import ceil, floor
 """ Implement an elo model based on this article : 
     - https://stuartlacy.co.uk/2017/08/31/implementing-an-elo-rating-system-for-european-football/
     
-    Uses this article to convert elo difference into winning probability :
+    This article is used to convert elo difference into winning probability :
     - https://betting.betfair.com/football/premier-league/barclays-premier-league-coverting-ratings-to-odds-030515-186.html
 """
 
