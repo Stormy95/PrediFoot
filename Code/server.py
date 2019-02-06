@@ -1,3 +1,6 @@
+""" Serveur du site web situé à l'adresse : http://srawls35.pythonanywhere.com/ """
+
+
 from flask import *
 from modele_poisson import *
 import pandas as pd
